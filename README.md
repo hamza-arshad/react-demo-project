@@ -6,7 +6,10 @@ Clone the repository and use following scripts to test the app
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, first you will run:
+### `npm install`
+
+## After installing modules, you can run:
 
 ### `npm start`
 
