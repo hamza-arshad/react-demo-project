@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
 
 class InformationTab extends Component {
 
@@ -45,6 +46,10 @@ class InformationTab extends Component {
       </div>
     )
   }
+}
+
+InformationTab.propTypes = {
+  member: PropTypes.object.isRequired
 }
 
 export default InformationTab

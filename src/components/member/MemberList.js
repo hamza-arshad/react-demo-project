@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MemberItem from './MemberItem'
 import './MemberList.css';
 
 class MemberList extends Component {
+
+  state = {
+    search: ''
+  }
+
+  onChange = (e) => {
+    console.log("Just a test change handler");
+    this.setState( {search: e.target.value} );
+  }
 
   render() {
     return (
@@ -14,7 +24,7 @@ class MemberList extends Component {
           </div>
           <div id="navigation">
             <form>
-              <input type="text" placeholder="Mitglieder suchen" />
+              <input type="text" name="search" value={this.state.search} onChange={this.onChange} placeholder="Mitglieder suchen" />
             </form>
             <div id="browse_pages">
               <ul>
@@ -35,6 +45,12 @@ class MemberList extends Component {
         </React.Fragment>
     )
   }
+}
+
+// PropTypes
+MemberList.propTypes = {
+  members: PropTypes.array.isRequired,
+  deleteMember: PropTypes.func.isRequired
 }
 
 export default MemberList

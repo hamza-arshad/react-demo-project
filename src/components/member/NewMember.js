@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './NewMember.css';
+import PropTypes from "prop-types";
 
 class NewMember extends Component {
 
@@ -56,7 +57,7 @@ class NewMember extends Component {
             ...prevState.newUser, [name]: value
           }
         }
-      }, () => console.log(this.state.newUser)
+      }
     )
   };
 
@@ -141,6 +142,10 @@ class NewMember extends Component {
       </React.Fragment>
     )
   }
+}
+
+NewMember.propTypes = {
+  addMember: PropTypes.func.isRequired
 }
 
 export default NewMember

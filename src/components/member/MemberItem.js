@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './MemberItem.css';
+import PropTypes from "prop-types";
 
 class MemberItem extends Component {
 
@@ -47,6 +48,11 @@ class MemberItem extends Component {
       </tr>
     )
   }
+}
+
+MemberItem.propTypes = {
+  member: PropTypes.object.isRequired,
+  deleteMember: PropTypes.func.isRequired
 }
 
 export default MemberItem

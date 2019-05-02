@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import './Menu.css';
+import PropTypes from "prop-types";
 
 class Menu extends Component {
 
@@ -38,6 +39,11 @@ class Menu extends Component {
       </ul>
     )
   }
+}
+
+Menu.propTypes = {
+  addClasses: PropTypes.string.isRequired,
+  toggleMenu: PropTypes.func.isRequired
 }
 
 export default Menu

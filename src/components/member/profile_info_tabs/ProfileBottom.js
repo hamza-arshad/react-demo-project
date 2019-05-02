@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import InformationTab from './InformationTab'
 
 import './ProfileBottom.css';
+import PropTypes from "prop-types";
 
 class ProfileBottom extends Component {
 
@@ -20,6 +21,10 @@ class ProfileBottom extends Component {
       </div>
     )
   }
+}
+
+ProfileBottom.propTypes = {
+  member: PropTypes.object.isRequired
 }
 
 export default ProfileBottom

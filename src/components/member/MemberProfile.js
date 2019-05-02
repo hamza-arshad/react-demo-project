@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProfileBottom from './profile_info_tabs/ProfileBottom'
 import './MemberProfile.css';
+import PropTypes from "prop-types";
 
 class MemberProfile extends Component {
 
@@ -42,6 +43,10 @@ class MemberProfile extends Component {
       </React.Fragment>
     )
   }
+}
+
+MemberProfile.propTypes = {
+  members: PropTypes.array.isRequired
 }
 
 export default MemberProfile
