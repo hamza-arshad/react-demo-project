@@ -1,7 +1,7 @@
 ## Pre requisites
 Nodejs and npm must be installed in the system
 
-##How to run
+## How to run
 Clone the repository and use following scripts to test the app
 
 ## Available Scripts
