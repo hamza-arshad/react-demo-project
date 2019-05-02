@@ -1,0 +1,44 @@
+#navigation {
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#navigation > form > input {
+    border: 1px solid #00963e;
+    border-radius: 20px;
+    text-align: center;
+    padding: 4px 25px;
+}
+
+#browse_pages {
+    height: 19px;
+    margin-top: 3px;
+}
+
+#browse_pages > ul {
+    display: flex;
+}
+
+#browse_pages > ul > li > span {
+    cursor: pointer;
+}
+
+#browse_pages > ul > li:nth-child(2) {
+    font-size: 11pt;
+    line-height: 15pt;
+    margin: 0 20px;
+}
+
+#browse_pages > ul > li:nth-child(3) {
+    transform: rotate(180deg);
+}
+
+#browse_pages > ul > li img {
+    display: block;
+}
+
+#members_table {
+    width: 100%;
+    margin-top: 35px;
+}

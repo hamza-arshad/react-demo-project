@@ -1,0 +1,213 @@
+#new_member_form {
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+}
+
+#new_member_form h2 {
+    color: #00963e;
+    font-size: 18pt;
+    line-height: 16pt;
+    margin-bottom: 25px;
+}
+
+#new_member_form > div:not(.add_child_button) {
+    border: 1px solid #bcbcbc;
+    padding: 40px 50px;
+}
+
+#new_member_form > div:not(:last-child):not(.add_child_button) {
+    margin-bottom: 50px;
+}
+
+#new_member_form input:not(#new_member_submit) {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1.5px solid #bcbcbc;
+    width: 100%;
+    padding-bottom: 6px;
+}
+
+.form_row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form_row > div,
+.form_row > div > h2,
+.form_row > div > input {
+    box-sizing: border-box;
+}
+
+#personal_info > div:first-child,
+#personal_info > div:nth-child(3),
+#contact_info > div:first-child,
+#address_info > div:nth-child(2),
+#address_info > div:nth-child(4) {
+    border-right: 1.5px solid #bcbcbc;
+}
+
+#personal_info > div:nth-child(2) > h2,
+#personal_info > div:nth-child(2) > input,
+#personal_info > div:nth-child(4) > h2,
+#personal_info > div:nth-child(4) > input,
+#contact_info > div:nth-child(2) > h2,
+#contact_info > div:nth-child(2) > input,
+#address_info > div:nth-child(3) > h2,
+#address_info > div:nth-child(3) > input,
+#address_info > div:nth-child(5) > h2,
+#address_info > div:nth-child(5) > input {
+    padding-left: 30px;
+}
+
+#personal_info > div:first-child {
+    flex-basis: 26%;
+}
+
+#personal_info > div:nth-child(2) {
+    flex-basis: 74%;
+}
+
+#personal_info > div:nth-child(3) {
+    flex-basis: 41%;
+}
+
+#personal_info > div:nth-child(4) {
+    flex-basis: 59%;
+}
+
+.form_row > div:first-child,
+.form_row > div:nth-child(2) {
+    margin-bottom: 40px;
+}
+
+#contact_info > div:first-child {
+    flex-basis: 37%;
+}
+
+#contact_info > div:nth-child(2) {
+    flex-basis: 63%;
+}
+
+#contact_info > div:nth-child(3) {
+    flex-basis: 100%;
+}
+
+#address_info > div:first-child {
+    flex-basis: 100%;
+}
+
+#address_info > div:nth-child(2) {
+    flex-basis: 26%;
+}
+
+#address_info > div:nth-child(3) {
+    flex-basis: 74%;
+}
+
+#address_info > div:nth-child(4) {
+    flex-basis: 35%;
+}
+
+#address_info > div:nth-child(5) {
+    flex-basis: 65%;
+}
+
+#spouse_info > div,
+.children_info > div {
+    flex-basis: 100%;
+}
+
+#spouse_info > div:nth-child(2),
+.children_info > div:nth-child(2) {
+    margin-bottom: 0;
+}
+
+#new_member_submit {
+    transition: background .25s;
+    border-radius: 30px;
+    border:none;
+    background: #8feab5;
+    font-size: 13pt;
+    color: #00963e;
+    padding: 10px 28px;
+    cursor: pointer;
+}
+
+.children_info {
+    position: relative;
+}
+
+.add_child_button {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.add_child_button p {
+    height: 18px;
+    margin-right: 10px;
+    position: relative;
+    flex-basis: 160px;
+    overflow: hidden;
+}
+
+.add_child_text {
+    transition: opacity .5s, right .2s;
+    color: #00963e;
+    position: absolute;
+    right: -150px;
+    top: 0;
+    display: block;
+    opacity: 0;
+}
+
+.show_text {
+    right: 0;
+    opacity: 1;
+}
+
+.add_child_button a img {
+    transition: transform .25s;
+}
+
+.add_child_button a:hover img {
+    transform: rotate(90deg);
+}
+
+#new_member_submit:hover {
+    background: #5ab763;
+}
+
+@media only screen and (max-width: 1510px) {
+    #contact_info > div:first-child,
+    #contact_info > div:nth-child(2) {
+        flex-basis: 100%;
+        border-right: none;
+    }
+
+    #contact_info > div:nth-child(2) > h2,
+    #contact_info > div:nth-child(2) > input {
+        padding-left: 0;
+    }
+}
+
+@media only screen and (max-width: 1250px) {
+    #address_info > div:nth-last-child(1),
+    #address_info > div:nth-last-child(2) {
+        flex-basis: 100%;
+        border-right: none;
+    }
+
+    #address_info > div:nth-last-child(2) {
+        margin-bottom: 40px;
+    }
+
+    #address_info > div:last-child > h2,
+    #address_info > div:last-child > input {
+        padding-left: 0;
+    }
+}

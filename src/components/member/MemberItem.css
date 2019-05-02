@@ -1,0 +1,73 @@
+.member_img,
+.member_info {
+    vertical-align: top;
+}
+
+.member_img {
+    width: 120px;
+    padding-right: 20px;
+}
+
+.top_row,
+.edit_members,
+.bottom_row > ul {
+    display: flex;
+}
+
+.edit_members > span {
+    width: 24px;
+    display:block;
+    cursor: pointer;
+}
+
+.edit_members > span:not(:last-child) {
+    margin-right:20px;
+}
+
+.member_info {
+    width: 87.29%;
+    padding-bottom: 50px;
+}
+
+.top_row {
+    border-bottom: 1px solid #00963e;
+    padding-bottom: 9px;
+    margin-bottom: 13px;
+    justify-content: space-between;
+}
+
+.top_row > h2 {
+    font-size: 16pt;
+    line-height: 21pt;
+}
+
+.info_column li {
+    font-size: 11pt;
+    line-height: 14pt;
+}
+
+.info_column span {
+    color: #00963e;
+    display: inline-block;
+}
+
+.general_info {
+    flex-basis: 27%;
+}
+
+.address,
+.contact {
+    flex-basis: 41%;
+}
+
+.general_info span {
+    width:90px;
+}
+
+.address span {
+    width:115px;
+}
+
+.contact span {
+    width:60px;
+}
