@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 import ProfileBottom from './profile_info_tabs/ProfileBottom'
+import { graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 import './MemberProfile.css';
-import PropTypes from "prop-types";
 
 class MemberProfile extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      member: props.members.filter((value) => value.id === Number.parseInt(props.match.params.id))[0]
-    };
-    ;debugger;
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {this.props.memberQuery(props.match.params.id)};
+  // }
 
   render() {
+    if (this.props.memberQuery.loading) {
+      return (
+        <div className='flex w-100 h-100 items-center justify-center pt7'>
+          <div>
+            Loading
+            (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})
+          </div>
+        </div>
+      )
+    }
+
+    const {Member} = this.props.memberQuery
     return (
       <React.Fragment>
         <div id="portrait_and_name">
           <div id="portrait">
-            <div><img src={this.state.member.big_img} alt="" width="90%" height="" /></div>
+            <div><img src="/img/members/big/placeholder.jpg" alt="" width="90%" height="" /></div>
             <ul id="options">
               <li>
                 <span className="options_button"><img src="/img/image_icon.png" alt="" width="" height="" /></span>
@@ -32,21 +42,48 @@ class MemberProfile extends Component {
           </div>
 
           <div id="name">
-            <h1>{this.state.member.name}</h1>
-            <p><span>Ranking:</span> {this.state.member.ranking} / 10</p>
-            <p><span>Erstellung:</span> {this.state.member.created_at}</p>
+            <h1>{Member.firstName}</h1>
+            <p><span>Ranking:</span> {Member.ranking} / 10</p>
+            <p><span>Erstellung:</span> {Member.createdAt.slice(0,10)}</p>
           </div>
         </div>
 
-        <ProfileBottom member={this.state.member}/>
+        <ProfileBottom member={Member}/>
 
       </React.Fragment>
     )
   }
 }
 
-MemberProfile.propTypes = {
-  members: PropTypes.array.isRequired
-}
+const MEMBER_QUERY = gql`
+  query MemberQuery($id: ID!) {
+    Member(id: $id) {
+      id
+      firstName
+      lastName
+      phone
+      mobile
+      email
+      region
+      country
+      city
+      streetNumber
+      sex
+      ranking
+      zipcode
+      memberNumber
+      createdAt
+    }
+  }
+`
 
-export default MemberProfile
+const MemberProfileWithQuery = graphql(MEMBER_QUERY, {
+  name: 'memberQuery',
+  options: ({match}) => ({
+    variables: {
+      id: match.params.id,
+    }
+  }),
+})(MemberProfile)
+
+export default MemberProfileWithQuery

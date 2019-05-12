@@ -24,9 +24,9 @@ class InformationTab extends Component {
           <li className="subsection subsection_column">
             <ul>
               <li className="subsection_category"><p>Mitgliedsnummer:</p></li>
-              <li><p>{this.props.member.members}</p></li>
+              <li><p>{this.props.member.memberNumber}</p></li>
               <li className="subsection_category"><p>Telefon:</p></li>
-              <li><p>{this.props.member.tel}</p></li>
+              <li><p>{this.props.member.phone}</p></li>
               <li className="subsection_category"><p>Mobil:</p></li>
               <li><p>{this.props.member.mobile}</p></li>
               <li className="subsection_category"><p>Email:</p></li>
@@ -37,8 +37,8 @@ class InformationTab extends Component {
           <li className="subsection subsection_column">
             <ul>
               <li className="subsection_category"><p>Adresse:</p></li>
-              <li><p>{this.props.member.street}</p></li>
-              <li><p>{this.props.member.postcode} {this.props.member.city}</p></li>
+              <li><p>{this.props.member.streetNumber}</p></li>
+              <li><p>{this.props.member.zipcode} {this.props.member.city}</p></li>
               <li><p>{this.props.member.country}</p></li>
             </ul>
           </li>

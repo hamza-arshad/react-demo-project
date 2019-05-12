@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import MemberItem from './MemberItem'
+import { graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 import './MemberList.css';
 
 class MemberList extends Component {
@@ -10,12 +11,28 @@ class MemberList extends Component {
     search: ''
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.location.key !== nextProps.location.key) {
+      this.props.allMembersQuery.refetch()
+    }
+  }
+
   onChange = (e) => {
     console.log("Just a test change handler");
     this.setState( {search: e.target.value} );
   }
 
   render() {
+    if (this.props.allMembersQuery.loading) {
+      return (
+        <div className='flex w-100 h-100 items-center justify-center pt7'>
+          <div>
+            Loading
+            (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})
+          </div>
+        </div>
+      )
+    }
     return (
         <React.Fragment>
           <div id="sub_header">
@@ -37,8 +54,8 @@ class MemberList extends Component {
 
           <table id="members_table">
             <tbody>
-              {this.props.members.map((member) => {
-                return <MemberItem key={member.id} member={member} deleteMember={this.props.deleteMember} />;
+              {this.props.allMembersQuery.allMembers && this.props.allMembersQuery.allMembers.map((member) => {
+                return <MemberItem key={member.id} member={member} />;
               })}
             </tbody>
           </table>
@@ -47,10 +64,31 @@ class MemberList extends Component {
   }
 }
 
-// PropTypes
-MemberList.propTypes = {
-  members: PropTypes.array.isRequired,
-  deleteMember: PropTypes.func.isRequired
-}
+const ALL_MEMBERS_QUERY = gql`
+  query AllMembersQuery {
+    allMembers {
+      id
+      firstName
+      lastName
+      phone
+      mobile
+      email
+      region
+      country
+      city
+      streetNumber
+      sex
+      zipcode
+      memberNumber
+    }
+  }
+`
 
-export default MemberList
+const ListMemberWithQuery = graphql(ALL_MEMBERS_QUERY, {
+  name: 'allMembersQuery',
+  options: {
+    fetchPolicy: 'network-only',
+  },
+})(MemberList)
+
+export default ListMemberWithQuery

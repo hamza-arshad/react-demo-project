@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import './NewMember.css';
-import PropTypes from "prop-types";
+import { withRouter } from 'react-router-dom'
+import { graphql} from 'react-apollo'
+import gql from 'graphql-tag'
 
 class NewMember extends Component {
 
   state = {
     newUser: {
-      name: '',
-      lastname: '',
-      members: '',
-      gender: '',
-      street: '',
-      postcode: '',
+      firstName: '',
+      lastName: '',
+      memberNumber: '',
+      sex: '',
+      streetNumber: '',
+      zipcode: '',
       city: '',
-      state: '',
+      region: '',
       country: '',
-      tel: '',
+      phone: '',
       mobile: '',
       email: '',
       title: 'Mr.',
@@ -23,30 +25,14 @@ class NewMember extends Component {
       big_img: '/img/members/big/placeholder.jpg',
       ranking: 10
     }
-  }
+  };
 
-  onSubmit = (e) => {
+  onSubmit = async (e) => {
     e.preventDefault();
-    this.props.addMember(this.state.newUser);
-    this.setState({newUser: {
-        name: '',
-        lastname: '',
-        members: '',
-        gender: '',
-        street: '',
-        postcode: '',
-        city: '',
-        state: '',
-        country: '',
-        tel: '',
-        mobile: '',
-        email: '',
-        title: 'Mr.',
-        small_img: '/img/members/small/placeholder.jpg',
-        big_img: '/img/members/big/placeholder.jpg',
-        ranking: 10
-      }});
-  }
+    const {firstName, lastName, memberNumber, sex, zipcode, streetNumber, city, region, country, phone, mobile, email, title, ranking} = this.state.newUser;
+    await this.props.createMemberMutation({variables: {firstName, lastName, memberNumber, sex, streetNumber, zipcode, city, region, country, phone, mobile, email, title, ranking}});
+    this.props.history.replace('/');
+  };
 
   onChange = (e) => {
     let value = e.target.value;
@@ -70,7 +56,7 @@ class NewMember extends Component {
         <form id="new_member_form" onSubmit={this.onSubmit}>
           <div id="member_number">
             <h2>Mitgliedsnummer</h2>
-            <input type="text" name="members" value={this.state.newUser.members} onChange={this.onChange} placeholder="Mitgliedsnummer eingeben" />
+            <input type="text" name="memberNumber" value={this.state.newUser.memberNumber} onChange={this.onChange} placeholder="Mitgliedsnummer eingeben" />
           </div>
 
           <div id="personal_info" className="form_row">
@@ -81,24 +67,24 @@ class NewMember extends Component {
 
             <div>
               <h2>Geschlecht</h2>
-              <input type="text" name="gender" value={this.state.newUser.gender} onChange={this.onChange} placeholder="Geschlecht eingeben" />
+              <input type="text" name="sex" value={this.state.newUser.sex} onChange={this.onChange} placeholder="Geschlecht eingeben" />
             </div>
 
             <div>
               <h2>Vorname</h2>
-              <input type="text" name="name" value={this.state.newUser.name} onChange={this.onChange} placeholder="Vorname eingeben" />
+              <input type="text" name="firstName" value={this.state.newUser.firstName} onChange={this.onChange} placeholder="Vorname eingeben" />
             </div>
 
             <div>
               <h2>Familienname</h2>
-              <input type="text" name="lastname" value={this.state.newUser.lastname} onChange={this.onChange} placeholder="Familienname eingeben" />
+              <input type="text" name="lastName" value={this.state.newUser.lastName} onChange={this.onChange} placeholder="Familienname eingeben" />
             </div>
           </div>
 
           <div id="contact_info" className="form_row">
             <div>
               <h2>Telefonnummer</h2>
-              <input type="text" name="tel" value={this.state.newUser.tel} onChange={this.onChange} placeholder="Telefonnummer eingeben" />
+              <input type="text" name="phone" value={this.state.newUser.phone} onChange={this.onChange} placeholder="Telefonnummer eingeben" />
             </div>
 
             <div>
@@ -115,12 +101,12 @@ class NewMember extends Component {
           <div id="address_info" className="form_row">
             <div>
               <h2>Straße &amp; Hausnummer</h2>
-              <input type="text" name="street" value={this.state.newUser.street} onChange={this.onChange} placeholder="Straße/Hausnummer eingeben" />
+              <input type="text" name="streetNumber" value={this.state.newUser.streetNumber} onChange={this.onChange} placeholder="Straße/Hausnummer eingeben" />
             </div>
 
             <div>
               <h2>PLZ</h2>
-              <input type="text" name="postcode" value={this.state.newUser.postcode} onChange={this.onChange} placeholder="PLZ eingeben" />
+              <input type="text" name="zipcode" value={this.state.newUser.zipcode} onChange={this.onChange} placeholder="PLZ eingeben" />
             </div>
 
             <div>
@@ -130,7 +116,7 @@ class NewMember extends Component {
 
             <div>
               <h2>Bundesland</h2>
-              <input type="text" name="state" value={this.state.newUser.state} onChange={this.onChange} placeholder="Bundesland eingeben" />
+              <input type="text" name="region" value={this.state.newUser.region} onChange={this.onChange} placeholder="Bundesland eingeben" />
             </div>
             <div>
               <h2>Land</h2>
@@ -144,8 +130,27 @@ class NewMember extends Component {
   }
 }
 
-NewMember.propTypes = {
-  addMember: PropTypes.func.isRequired
-}
+const CREATE_MEMBER_MUTATION = gql`
+  mutation CreateMemberMutation($firstName: String!, $lastName: String!, $memberNumber: String!, $sex: String!, $streetNumber: String!, $zipcode: String!, $city: String!, $region: String!, $country: String!, $phone: String!, $mobile: String!, $email: String!, $title: String!, $ranking: Float!) {
+    createMember(firstName: $firstName, lastName: $lastName, memberNumber: $memberNumber, sex: $sex, streetNumber: $streetNumber, zipcode: $zipcode, city: $city, region: $region, country: $country, phone: $phone, mobile: $mobile, email: $email, title: $title, ranking: $ranking) {
+      id
+      firstName
+      lastName
+      memberNumber
+      sex
+      streetNumber
+      zipcode
+      city
+      region
+      country
+      phone
+      mobile
+      email
+      title
+      ranking
+    }
+  }
+`;
 
-export default NewMember
+const NewMemberWithMutation = graphql(CREATE_MEMBER_MUTATION, {name: 'createMemberMutation'})(NewMember)
+export default withRouter(NewMemberWithMutation)
