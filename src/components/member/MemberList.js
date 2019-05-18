@@ -4,6 +4,7 @@ import MemberItem from './MemberItem'
 import { graphql} from 'react-apollo'
 import gql from 'graphql-tag'
 import './MemberList.css';
+import {isLoggedIn} from "../../services/AuthService";
 
 class MemberList extends Component {
 
@@ -37,7 +38,9 @@ class MemberList extends Component {
         <React.Fragment>
           <div id="sub_header">
             <h1>Mitglieder</h1>
-            <Link to={"/new_member"}><img src="img/new_member_icon.png" alt="" width="48" height="40" /></Link>
+            {
+              (isLoggedIn())? <Link to={"/new_member"}><img src="img/new_member_icon.png" alt="" width="48" height="40" /></Link> : ''
+            }
           </div>
           <div id="navigation">
             <form>

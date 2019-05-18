@@ -4,6 +4,7 @@ import './MemberItem.css';
 import PropTypes from "prop-types";
 import { graphql} from 'react-apollo'
 import gql from 'graphql-tag'
+import {isLoggedIn} from "../../services/AuthService";
 
 class MemberItem extends Component {
 
@@ -23,7 +24,10 @@ class MemberItem extends Component {
             <div className="edit_members">
               <span><img src="img/wrench_icon.png" alt="" width="100%" height="" /></span>
               <span><img src="img/deactivate_icon.png" alt="" width="100%" height="" /></span>
-              <span><img src="img/delete_member_icon.png" alt="" width="100%" height="" onClick={this.onDelete.bind(this, this.props.member.id)} /></span>
+              {
+                (isLoggedIn())? <span><img src="img/delete_member_icon.png" alt="" width="100%" height=""
+                           onClick={this.onDelete.bind(this, this.props.member.id)}/></span> : ''
+              }
             </div>
           </div>
           <div className="bottom_row">

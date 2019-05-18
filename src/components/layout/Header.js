@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Menu from './Menu'
-import { Link } from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
+import { login, logout, isLoggedIn } from '../../services/AuthService';
 
 import './Header.css';
 
@@ -36,8 +37,9 @@ class Header extends Component {
                     </li>
                     <li>
                       <img src="/img/login_icon.png" alt="" width="15" height="15" />
-                      <span>Login</span> /
-                      <span>Registrieren</span>
+                      {
+                        (isLoggedIn())? (<button className="btn btn-danger log" onClick={() => {logout(); this.props.history.replace("/");}}>Log out </button> ) : ( <button className="btn btn-info log" onClick={() => login()}>Log In</button> )
+                      }
                     </li>
                   </ul>
                 </div>
@@ -49,4 +51,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withRouter(Header)

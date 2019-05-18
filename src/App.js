@@ -7,6 +7,8 @@ import MemberProfile from './components/member/MemberProfile';
 import NewMember from './components/member/NewMember';
 
 import './App.css';
+import Callback from "./components/auth/Callback";
+import {requireAuth} from "./services/AuthService";
 
 class App extends Component {
   render() {
@@ -21,8 +23,11 @@ class App extends Component {
             <Route path="/profile/:id" render={props => (
               <MemberProfile {...props}/>
             )} />
-            <Route path="/new_member" render={props => (
+            <Route path="/new_member" onEnter={requireAuth} render={props => (
               <NewMember {...props} />
+            )}/>
+            <Route path="/callback" render={props => (
+              <Callback {...props} />
             )}/>
           </div>
           <Footer />
