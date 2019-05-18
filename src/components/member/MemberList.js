@@ -26,12 +26,7 @@ class MemberList extends Component {
   render() {
     if (this.props.allMembersQuery.loading) {
       return (
-        <div className='flex w-100 h-100 items-center justify-center pt7'>
-          <div>
-            Loading
-            (from {process.env.REACT_APP_GRAPHQL_ENDPOINT})
-          </div>
-        </div>
+        <div className="loader">Loading...</div>
       )
     }
     return (

@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom'
 import { getAndStoreParameters, getIdToken, isLoggedIn } from '../../services/AuthService';
 import { graphql } from 'react-apollo'
@@ -32,7 +32,7 @@ class Callback extends Component {
   }
 
   render() {
-    return null;
+    return <div className="loader">Loading...</div>
   }
 }
 
